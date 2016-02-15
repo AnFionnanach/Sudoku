@@ -51,19 +51,15 @@
 
             // Board function tests
             QUnit.test("boardFunctions", function (assert) {
-                // so do I have to create the results individually???
-                // seems like a lot of work!!!
-                // particularly if I need to get the coordinates right as well...
-                // which isn't acutally necessary - the value would do!
                 assert.deepEqual(getRow(2, puzzle), [puzzle[2][0], puzzle[2][1], puzzle[2][2], puzzle[2][3], puzzle[2][4], puzzle[2][5], puzzle[2][6], puzzle[2][7], puzzle[2][8]], "Get a row");
-                assert.deepEqual(getRowExCell(2, 5, puzzle), ["7", "8", "9", "1", "2", "4", "5", "6"], "Get a row");
-                assert.deepEqual(getColumn(7, puzzle), ["8", "2", "5", "9", "3", "6", "1", "4", "7"], "Get a column");
-                assert.deepEqual(getColumnExCell(3, 7, puzzle), ["8", "2", "5", "3", "6", "1", "4", "7"], "Get a column");
-                assert.deepEqual(getSquare(1, 1, puzzle), ["1", "2", "3", "4", "6", "7", "8", "9", "5"], "Get square for (1,1)");
-                assert.deepEqual(getSquare(6, 6, puzzle), ["1", "2", "3", "4", "5", "6", "7", "8", "9"], "Get square for (6,6)");
-                assert.deepEqual(getSquareExCell(6, 6, puzzle), ["1", "2", "3", "4", "5", "6", "7", "8"], "Get square for (6,6) excluding (6,6)");
-                assert.deepEqual(getBuddiesExCell(5, 5, puzzle), ["8", "9", "1", "2", "3", "5", "6", "7", "6", "9", "3", "7", "1", "8", "2", "5", "5", "6", "8", "9"], "All cells for (5,5)");
-                assert.deepEqual(getCommonCellsExCells(1, 1, 7, 7, puzzle), ["2", "7"], "Common cells for (1,1) and (7,7)");
+                assert.deepEqual(getRowExCell(2, 5, puzzle), [puzzle[2][0], puzzle[2][1], puzzle[2][2], puzzle[2][3], puzzle[2][4], puzzle[2][6], puzzle[2][7], puzzle[2][8]], "Get a row excluding the cell");
+                assert.deepEqual(getColumn(7, puzzle), [puzzle[0][7], puzzle[1][7], puzzle[2][7], puzzle[3][7], puzzle[4][7], puzzle[5][7], puzzle[6][7], puzzle[7][7], puzzle[8][7]], "Get a column");
+                assert.deepEqual(getColumnExCell(3, 7, puzzle), [puzzle[0][7], puzzle[1][7], puzzle[2][7], puzzle[4][7], puzzle[5][7], puzzle[6][7], puzzle[7][7], puzzle[8][7]], "Get a column excluding the cell");
+                assert.deepEqual(getSquare(1, 1, puzzle), [puzzle[0][0], puzzle[0][1], puzzle[0][2], puzzle[1][0], puzzle[1][2], puzzle[2][0], puzzle[2][1], puzzle[2][2], puzzle[1][1]], "Get square for (1,1)");
+                assert.deepEqual(getSquare(6, 6, puzzle), [puzzle[6][7], puzzle[6][8], puzzle[7][6], puzzle[7][7], puzzle[7][8], puzzle[8][6], puzzle[8][7], puzzle[8][8], puzzle[6][6]], "Get square for (6,6)");
+                assert.deepEqual(getSquareExCell(6, 6, puzzle), [puzzle[6][7], puzzle[6][8], puzzle[7][6], puzzle[7][7], puzzle[7][8], puzzle[8][6], puzzle[8][7], puzzle[8][8]], "Get square for (6,6) excluding (6,6)");
+                assert.deepEqual(getBuddiesExCell(2, 7, puzzle), [puzzle[2][0], puzzle[2][1], puzzle[2][2], puzzle[2][3], puzzle[2][4], puzzle[2][5], puzzle[2][6], puzzle[2][8], puzzle[0][7], puzzle[1][7], puzzle[3][7], puzzle[4][7], puzzle[5][7], puzzle[6][7], puzzle[7][7], puzzle[8][7], puzzle[0][6], puzzle[0][8], puzzle[1][6], puzzle[1][8]], "All cells for (2,7)");
+                assert.deepEqual(getCommonCellsExCells(1, 1, 7, 7, puzzle), [puzzle[1][7], puzzle[7][1]], "Common cells for (1,1) and (7,7)");
             });
 
         </script>

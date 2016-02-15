@@ -28,7 +28,7 @@ var getColumn = function(column, board) {
 		columnCells.push(board[x][column]);
 	}
 	return columnCells;
-}
+};
 
 var getSquareExCell = function(row, column, board) {
 	var square = new Array();
@@ -42,7 +42,7 @@ var getSquareExCell = function(row, column, board) {
 		}
 	}
 	return square;
-}
+};
 
 var getSquareExCellRowColumn = function(row, column, board) {
 	var square = new Array();
@@ -56,7 +56,7 @@ var getSquareExCellRowColumn = function(row, column, board) {
 		}
 	}
 	return square;
-}
+};
 
 var getBuddiesExCell = function(row, column, board) {
 	var cells = new Array();
@@ -64,13 +64,13 @@ var getBuddiesExCell = function(row, column, board) {
 	cells = cells.concat(getColumnExCell(row, column, board));
 	cells = cells.concat(getSquareExCellRowColumn(row, column, board));
 	return cells;
-}
+};
 
 var getSquare = function(row, column, board) {
 	var square = getSquareExCell(row, column, board);
 	square.push(board[row][column]);
 	return square;
-}  
+};  
 	
 var getCommonCellsExCells = function(row1, column1, row2, column2, board) {
 	var cells1 = getBuddiesExCell(row1, column1, board);
@@ -79,10 +79,10 @@ var getCommonCellsExCells = function(row1, column1, row2, column2, board) {
 	var commonCells = new Array();
 	for (x = 0; x < cells1.length; x++) {
 		for (y = 0; y < cells2.length; y++) {
-			if (cells1[x] == cells2[y]) {
+			if (cells1[x] === cells2[y]) {
 				commonCells.push(cells1[x]);
 			}
 		}
 	}
 	return commonCells;
-}
+};
