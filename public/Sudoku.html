@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+		
+	<body>
+
+		<h1>Sudoku Cracker</h1>
+		
+		<script src="js/Cell.js"></script>
+		<script src="js/isFinished.js"></script>
+
+		<script>
+		
+			var board = new Array();
+			var initialise = function(board) {
+				var solution = new Array();
+				solution[0] = ["1","2","3","4","5","6","7","8","9"];
+				solution[1] = ["4","5","6","7","8","9","1","2","3"];
+				solution[2] = ["7","8","9","1","2","3","4","5","6"];
+				solution[3] = ["2","3","4","5","6","7","8","9","1"];
+				solution[4] = ["5","6","7","8","9","1","2","3","4"];
+				solution[5] = ["8","9","1","2","3","4","5","6","7"];
+				solution[6] = ["3","4","5","6","7","8","9","1","2"];
+				solution[7] = ["6","7","8","9","1","2","3","4","5"];
+				solution[8] = ["9","1","2","3","4","5","6","7","8"];
+
+				for (var x = 0; x < 9; x++) {
+					board[x] = new Array();
+					for (var y = 0; y < 9; y++) {
+						board[x][y] = new Cell(x, y);
+						board[x][y].setValue(solution[x][y]);
+					};
+				};
+				
+
+			};
+						
+			var crackIt = function(board) {
+			};
+
+			var display = function(board) {
+				for (var x = 0; x < board.length; x++) {
+					document.write("| ");
+					for (var y = 0; y < board[x].length; y++) {
+						document.write(board[x][y].candidates + " |");
+					};
+					document.write("<br/>");
+				};
+			};
+			
+			var puzzle = new Array();
+			
+			initialise(puzzle);
+			  
+			var finished = false;
+			while (!finished) {
+				crackIt(puzzle);
+				finished = isFinished(puzzle);
+				display(puzzle);
+			};
+
+			
+			
+		</script>
+	</body>
+</html> 

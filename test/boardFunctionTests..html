@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Board Function tests</title>
+        <link rel="stylesheet" href="../QUnit/qunit-1.20.0.css">
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+        <script src="../QUnit/qunit-1.20.0.js"></script>
+        <script src="../public/js/Cell.js"></script>
+
+        <script>
+            testCell = new Cell(4, 5);
+
+            QUnit.test("Cell", function (assert) {
+                assert.equal(testCell.candidates, "123456789", "Candidates are 1 to 9");
+                testCell.removeCandidate("8");
+                assert.equal(testCell.candidates, "12345679", "Remove a candidate");
+                testCell.setValue("3");
+                assert.equal(testCell.value, "3", "Value is 3");
+                assert.equal(testCell.candidates, "3", "Candidates reduced to 3");
+            });
+        </script>
+
+        <script src="../public/js/boardFunctions.js"></script>
+
+        <script>
+
+            // test data
+            var puzzle = new Array();
+            var solution = new Array();
+            solution[0] = ["1","2","3","4","5","6","7","8","9"];
+            solution[1] = ["4","5","6","7","8","9","1","2","3"];
+            solution[2] = ["7","8","9","1","2","3","4","5","6"];
+            solution[3] = ["2","3","4","5","6","7","8","9","1"];
+            solution[4] = ["5","6","7","8","9","1","2","3","4"];
+            solution[5] = ["8","9","1","2","3","4","5","6","7"];
+            solution[6] = ["3","4","5","6","7","8","9","1","2"];
+            solution[7] = ["6","7","8","9","1","2","3","4","5"];
+            solution[8] = ["9","1","2","3","4","5","6","7","8"];
+
+            for (var x = 0; x < 9; x++) {
+                    puzzle[x] = new Array();
+                    for (var y = 0; y < 9; y++) {
+                            puzzle[x][y] = new Cell(x, y);
+                            puzzle[x][y].setValue(solution[x][y]);
+                    };
+            };
+
+            // Board function tests
+            QUnit.test("boardFunctions", function (assert) {
+                // so do I have to create the results individually???
+                // seems like a lot of work!!!
+                // particularly if I need to get the coordinates right as well...
+                // which isn't acutally necessary - the value would do!
+                assert.deepEqual(getRow(2, puzzle), [puzzle[2][0], puzzle[2][1], puzzle[2][2], puzzle[2][3], puzzle[2][4], puzzle[2][5], puzzle[2][6], puzzle[2][7], puzzle[2][8]], "Get a row");
+                assert.deepEqual(getRowExCell(2, 5, puzzle), ["7", "8", "9", "1", "2", "4", "5", "6"], "Get a row");
+                assert.deepEqual(getColumn(7, puzzle), ["8", "2", "5", "9", "3", "6", "1", "4", "7"], "Get a column");
+                assert.deepEqual(getColumnExCell(3, 7, puzzle), ["8", "2", "5", "3", "6", "1", "4", "7"], "Get a column");
+                assert.deepEqual(getSquare(1, 1, puzzle), ["1", "2", "3", "4", "6", "7", "8", "9", "5"], "Get square for (1,1)");
+                assert.deepEqual(getSquare(6, 6, puzzle), ["1", "2", "3", "4", "5", "6", "7", "8", "9"], "Get square for (6,6)");
+                assert.deepEqual(getSquareExCell(6, 6, puzzle), ["1", "2", "3", "4", "5", "6", "7", "8"], "Get square for (6,6) excluding (6,6)");
+                assert.deepEqual(getBuddiesExCell(5, 5, puzzle), ["8", "9", "1", "2", "3", "5", "6", "7", "6", "9", "3", "7", "1", "8", "2", "5", "5", "6", "8", "9"], "All cells for (5,5)");
+                assert.deepEqual(getCommonCellsExCells(1, 1, 7, 7, puzzle), ["2", "7"], "Common cells for (1,1) and (7,7)");
+            });
+
+        </script>
+    </body>
+</html>

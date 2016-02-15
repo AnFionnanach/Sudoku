@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Cell tests</title>
+  <link rel="stylesheet" href="../QUnit/qunit-1.20.0.css">
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <script src="../QUnit/qunit-1.20.0.js"></script>
+  <script src="../public/js/Cell.js"></script>
+  
+  <script>
+		testCell = new Cell(4,5);
+
+		QUnit.test("Cell", function(assert){
+		assert.equal(testCell.candidates, "123456789", "Candidates are 1 to 9");
+		testCell.removeCandidate("8");
+		assert.equal(testCell.candidates, "12345679", "Remove a candidate");
+		testCell.setValue("3");
+		assert.equal(testCell.value, "3", "Value is 3");		
+		assert.equal(testCell.candidates, "3", "Candidates reduced to 3");
+	});
+  </script>
+</body>
+</html>
