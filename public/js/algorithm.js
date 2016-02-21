@@ -1,7 +1,14 @@
+var removeCandidate = function(candidate, cells) {
+    for (var i = 0; i < cells.length; i++) {
+        cells[i].removeCandidate(candidate);
+    };    
+};
+
 var isPointingPair = function(pair, cells) {
     
     for (var i = 0; i < cells.length; i++) {
         if (pair.candidates === cells[i].candidates) {
+          console.log("found pointing pair " + pair.candidates);
            return true; 
         }
     };
@@ -20,6 +27,7 @@ var hasHiddenSingle = function(cell, cells) {
           };
       };
       if (unique) {
+          console.log("found hidden single at " + cell.x + ", " + cell.y);
           return cell.candidates[i];
       }
     };
