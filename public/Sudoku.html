@@ -51,29 +51,27 @@
                     }
                 }
 
-                display(board);
-
                 for (var i = 0; i < 9; i++) {
                     for (var j = 0; j < 9; j++) {
                         var cell = board[i][j];
                         // if it's more than one, than check if it's part of a pointing pair for a column or row
                         if (cell.candidates.length > 1) {
                             // pairs in square
-                            var pairs = isPointingPair(cell, getSquareExCell(i, j, board));
-                            /*if (pairs !== []) {
+                            var pair = isPointingPair(cell, getSquareExCell(i, j, board));
+                            if (pair !== []) {
                                 // remove the number from all other cells in the row or column
-                                for (var k = 0; k < pairs.length; k++) {
-                                    var otherCell = board[pairs[k].x][pairs[k].y];
+                                for (var k = 0; k < pair.length; k++) {
+                                    var otherCell = board[pair[k].x][pair[k].y];
                                     var loadsaCells = [];
-                                    if (pairs[k].direction === "row") {
-                                        loadsaCells = getRowExCell(i, j);
+                                    if (pair[k].direction === "row") {
+                                        loadsaCells = getRowExCell(i, j, board);
                                     } else {
-                                        loadsaCells = getColumnExCell(i, j);
+                                        loadsaCells = getColumnExCell(i, j, board);
                                     }
                                     removeThisCell(otherCell, loadsaCells);
-                                    removeCandidate(pairs[k].value, loadsaCells);
+                                    removeCandidate(pair[k].value, loadsaCells);
                                 }
-                            }*/
+                            }
 
                             // check if it's a hidden single - in a row, column or square
                             if (cell.candidates.length > 1) {
@@ -101,6 +99,7 @@
                     // check it's a pair of pairs in a square
                     // roll out the big guns - XY Wing!
                 }
+            }
 
 
                 var display = function (board) {
@@ -133,7 +132,6 @@
                     }
                     ;
                 }
-            };
 
 
 
