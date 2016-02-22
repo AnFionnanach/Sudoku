@@ -69,9 +69,9 @@
             // algorithm tests
             var cells = new Array();
             for (var x = 0; x < 8; x++) {
-                cells[x] = new Cell(0,0);
+                cells[x] = new Cell(0,x+1);
             }
-            cells[0].candidates = "24";
+            cells[0].candidates = "457";
             cells[1].candidates = "23589";
             cells[2].candidates = "7";
             cells[3].candidates = "1";
@@ -80,16 +80,16 @@
             cells[6].candidates = "35";
             cells[7].candidates = "235";
             
-            var testCell = new Cell(0, 0);
+            var testCell2 = new Cell(0, 0);
             QUnit.test("algorithm", function (assert) {
-                testCell.candidates = "24";
-                assert.equal(isPointingPair(testCell, cells), true, "Pointing pair");
-                testCell.candidates = "25";
-                assert.equal(isPointingPair(testCell, cells), false, "Not a pointing pair");
-                testCell.candidates = "3546789";
-                assert.equal(hasHiddenSingle(testCell, cells), "6", "Hidden single");
-                testCell.candidates = "354789";
-                assert.equal(hasHiddenSingle(testCell, cells), "0", "Not a hidden single");
+                testCell2.candidates = "24";
+                assert.deepEqual(isPointingPair(testCell2, cells), [{direction: "row", value: "4", x: 0, y: 1}], "Pointing pair");
+                testCell2.candidates = "25";
+                assert.deepEqual(isPointingPair(testCell2, cells), [], "Not a pointing pair");
+                testCell2.candidates = "3546789";
+                assert.equal(hasHiddenSingle(testCell2, cells), "6", "Hidden single");
+                testCell2.candidates = "354789";
+                assert.equal(hasHiddenSingle(testCell2, cells), "0", "Not a hidden single");
             });
             
         </script>
