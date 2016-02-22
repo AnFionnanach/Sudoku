@@ -1,7 +1,7 @@
 var removeThisCell = function (cell, cells) {
     for (var i = 0; i < cells.length; i++) {
         if (cells[i] === cell) {
-            cells.pop(i);
+            cells.splice(i, 1);
         }
     }
 }
