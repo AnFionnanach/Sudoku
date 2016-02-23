@@ -93,6 +93,30 @@
                                     cell.setValue(value);
                                 }
                             }
+                            
+                            if (cell.candidates.length === 2) {
+                                var cells = getColumnExCell(i, j, board);
+                                var nakedPair = isNakedPair(cell, cells);
+                                if (nakedPair) {
+                                    removeThisCell(nakedPair, cells);
+                                    removeCandidate(nakedPair.candidates[0], cells);
+                                    removeCandidate(nakedPair.candidates[1], cells);
+                                }
+                                cells = getRowExCell(i, j, board);
+                                nakedPair = isNakedPair(cell, cells);
+                                if (nakedPair) {
+                                    removeThisCell(nakedPair, cells);
+                                    removeCandidate(nakedPair.candidates[0], cells);
+                                    removeCandidate(nakedPair.candidates[1], cells);
+                                }
+                                cells = getSquareExCell(i, j, board);
+                                nakedPair = isNakedPair(cell, cells);
+                                if (nakedPair) {
+                                    removeThisCell(nakedPair, cells);
+                                    removeCandidate(nakedPair.candidates[0], cells);
+                                    removeCandidate(nakedPair.candidates[1], cells);
+                                }
+                           }
                         }
                     }
 

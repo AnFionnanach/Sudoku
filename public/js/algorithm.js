@@ -12,6 +12,16 @@ var removeCandidate = function (candidate, cells) {
     }
 };
 
+var isNakedPair = function (cell, cells) {
+    for (var i = 0; i < cells.length; i++) {
+        if (cell.candidates === cells[i].candidates) {
+            console.log("Naked pair second at " + cells[i].x + ", " + cells[i].y);
+            return cells[i];
+        }
+    }
+    return false;
+}
+
 var isPointingPair = function (cell, cells) {
 
     var valueAndLocation = new Array();
