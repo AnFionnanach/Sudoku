@@ -22,6 +22,38 @@ var isNakedPair = function (cell, cells) {
     return false;
 }
 
+var hasXYZpairs = function (cell, cells) {
+
+    var trios = new Array();
+    var first = cell.candidates[0];
+    var second = cell.candidates[1];
+    var pair = "";
+    for (var i = 0; i < cells.length; i++) {
+        // we are only interested in pairs && the pair has to be different
+        if ((cells[i].candidates.length === 2) && (cells[i].candidates !== cell.candidates)) {
+            // the pair must contain at least one of the initial pair
+            var index = cells[i].candidates.search(first);
+            if (index !== -1) {
+                var otherIndex = (index + 1) % 2;
+                if (parseInt(cells[i].candidates[otherIndex]) < parseInt(second)) {
+                    pair = cells[i].candidates[otherIndex] + second;
+                } else {
+                    pair = second + cells[i].candidates[otherIndex];
+                }
+                // now search for the missing pair
+                for (var j = 0; j < cells.length; j++) {
+                    if (cells[j].candidates === pair) {
+                        // we have a chain!
+                        console.log("Pair (at " + cell.x + "," + cell.y +"): " + first + second + ", " + cells[i].candidates +  " (at " + cells[i].x + "," + cells[i].y +"), " + pair);
+                        trios.push({value: cells[i].candidates[otherIndex], first: cells[i], second: cells[j]});
+                    }
+                }
+            }
+        }
+    }
+    return trios;
+};
+
 var isPointingPair = function (cell, cells) {
 
     var valueAndLocation = new Array();

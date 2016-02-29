@@ -25,9 +25,6 @@
                 assert.equal(testCell.value, "3", "Value is 3");
                 assert.equal(testCell.candidates, "3", "Candidates reduced to 3");
             });
-        </script>
-
-        <script>
 
             // test data
             var puzzle = new Array();
@@ -63,9 +60,7 @@
                 assert.deepEqual(getCommonCellsExCells(1, 1, 7, 7, puzzle), [puzzle[1][7], puzzle[7][1]], "Common cells for (1,1) and (7,7)");
                 assert.deepEqual(getCommonCellsExCells(3, 1, 4, 2, puzzle), [puzzle[3][0], puzzle[3][2], puzzle[4][1], puzzle[5][1], puzzle[4][0], puzzle[5][0], puzzle[5][2]], "Common cells for (3,1) and (4,2)");
             });
-        </script>
-        
-        <script>
+ 
             // algorithm tests
             var cells = new Array();
             for (var x = 0; x < 8; x++) {
@@ -74,9 +69,9 @@
             cells[0].candidates = "457";
             cells[1].candidates = "23589";
             cells[2].candidates = "7";
-            cells[3].candidates = "1";
+            cells[3].candidates = "38";
             cells[4].candidates = "89";
-            cells[5].candidates = "89";
+            cells[5].candidates = "59";
             cells[6].candidates = "35";
             cells[7].candidates = "235";
             
@@ -90,6 +85,10 @@
                 assert.equal(hasHiddenSingle(testCell2, cells), "6", "Hidden single");
                 testCell2.candidates = "354789";
                 assert.equal(hasHiddenSingle(testCell2, cells), "0", "Not a hidden single");
+                testCell2.candidates = "58";
+                assert.deepEqual(hasXYZpairs(testCell2, cells), [{value: "9", first: cells[5], second: cells[4]}, {value: "3", first: cells[6], second: cells[3]},], "Check for an XYZ chain");
+                testCell2.candidates = "39";
+                assert.deepEqual(hasXYZpairs(testCell2, cells), [{value: "8", first: cells[3], second: cells[4]}, {value: "5", first: cells[6], second: cells[5]}], "Check for an XYZ chain");
             });
             
         </script>
