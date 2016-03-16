@@ -1,3 +1,5 @@
+// pointless comment for github test
+
 var candidates = "123456789";
 
 var Cell = function(x, y) {
